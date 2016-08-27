@@ -10,4 +10,4 @@ Socket.io for asynchronous connection.
 2. cd agar.io
 3. npm install
 4. node server.js
-5. Go to localhost:3000
+5. Go to localhost:3001
