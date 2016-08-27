@@ -8,6 +8,7 @@ function Blob(x, y, r, id) {
   this.r = r;
   this.vel = createVector(0,0);
   this.id  = id;
+  this.color = color(random()*255, random()*255, random()*255);
   this.update = function() {
     var xTrans = mouseX - width/2;
     var yTrans = mouseY - height/2;
@@ -45,7 +46,7 @@ function Blob(x, y, r, id) {
   }
 
   this.show = function() {
-    fill(255);
+    fill(this.color);
     ellipse(this.pos.x, this.pos.y, this.r*2, this.r*2);
   }
 }
