@@ -23,8 +23,8 @@ function blob(x, y, size, id) {
 }
 var blobs = [];
 var players = [];
-var width = 1000;
-var height = 600;
+var width = 2000;
+var height = 2000;
 for (var i = 0; i < 200; i++) {
 	var x = (Math.random()-.5) * width * 2;
 	var y = (Math.random()-.5) * height * 2;

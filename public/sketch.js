@@ -2,7 +2,8 @@
 // http://codingrainbow.com
 // http://patreon.com/codingrainbow
 // Code for: https://youtu.be/JXuxYMGe4KI
-
+var WIDTH = 2000;
+var HEIGHT = 2000;
 var players = [];
 var blobs = [];
 var enemies = [];
@@ -66,7 +67,7 @@ socket.on("createBlob", function(b) {
 });
 
 function setup() {
-  createCanvas(1000, 600);
+  createCanvas(window.innerWidth, window.innerHeight);
 }
 
 function draw() {

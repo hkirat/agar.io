@@ -11,20 +11,26 @@ function Blob(x, y, r, id) {
   this.update = function() {
     var xTrans = mouseX - width/2;
     var yTrans = mouseY - height/2;
-    if(this.pos.x + this.r >= width && xTrans>0) {
+    if(this.pos.x + this.r >= WIDTH && xTrans>0) {
       xTrans = 0;
     } 
-    if(this.pos.x - this.r <= -1 * width && xTrans<0) {
+    if(this.pos.x - this.r <= -1 * WIDTH && xTrans<0) {
       xTrans = 0;
     }
-    if(this.pos.y + this.r >= height && yTrans>0) {
+    if(this.pos.y + this.r >= HEIGHT && yTrans>0) {
       yTrans = 0;
     }
-    if(this.pos.y - this.r <= -1 * height && yTrans<0) {
+    if(this.pos.y - this.r <= -1 * HEIGHT && yTrans<0) {
       yTrans = 0;
     }
     var newvel = createVector(xTrans, yTrans);
-    newvel.setMag(3 * 64/this.r);
+    if(newvel.x!=0 || newvel.y !=0) {
+      if(keyIsDown(SHIFT)) {
+          newvel.setMag(6 * 64/this.r);
+      } else {
+        newvel.setMag(3 * 64/this.r);
+      }
+    }
     this.vel.lerp(newvel, 0.2);
     socket.emit("position", [this.pos.x + this.vel.x, this.pos.y + this.vel.y, this.r]);
   }
