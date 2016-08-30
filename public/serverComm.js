@@ -10,7 +10,7 @@ socket.on("initialiseEnemies", function(e) {
     players.push(new Blob(e[i].x, e[i].y, e[i].size, e[i].id));
   }
   var in1 = players.map(function(e) { return e.id; }).indexOf(index);
-  if(in1!=-1)
+  if(in1!=-1) 
     blob = players[in1];
   else 
     throw "Error, Player not found";
@@ -42,6 +42,9 @@ socket.on("ateUser", function(id) {
   var in2 = players.map(function(e) { return e.id; }).indexOf(id[0]);
   var sum = PI * players[in1].r * players[in1].r + PI * players[in2].r * players[in2].r;
   players[in2].r = sqrt(sum / PI);
+  if(id[1] == index) {
+    blob = false;
+  }
   players.splice(in1, 1);
 });
 

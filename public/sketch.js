@@ -16,11 +16,17 @@ function setup() {
 }
 
 function draw() {
-  if(!blob) {
-    return;
-  }
   background(0);
   translate(width/2, height/2);
+  if(!blob) {
+    for(var i = 0 ; i<players.length; i++) {
+      players[i].show();
+    }
+    for (var i = blobs.length-1; i >=0; i--) {
+      blobs[i].show();
+    }
+    return;
+  }
   var newzoom = 64 / blob.r;
   zoom = lerp(zoom, newzoom, 0.1);
   scale(zoom);
