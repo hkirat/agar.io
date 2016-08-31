@@ -10,9 +10,10 @@ function Blob(x, y, r, id) {
   this.id  = id;
   this.color = color(random()*255, random()*255, random()*255);
   this.update = function() {
-    var translation = this.setTranslation;
-    var xTrans = translation[0]
-    var yTrans = translation[1];
+    var transL = this.setTranslation();
+    var xTrans = transL[0]
+    var yTrans = transL[1];
+    console.log(transL);
     var newvel = createVector(xTrans, yTrans);
     if(newvel.x!=0 || newvel.y !=0) {
       if(keyIsDown(SHIFT)) {
