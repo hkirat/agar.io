@@ -20,9 +20,9 @@ Node.js For backend.
  - disconnect : Received if a particular client disconnects.
 
 ## Screenshots
-[!Agar.io](./images/agar.png)
+![Agar.io](./images/agar.png)
 
-[!Agar.io](./images/agar2.png)
+![Agar.io](./images/agar2.png)
 
 ## Setup
 1. git clone https://github.com/hkirat/agar.io.git
