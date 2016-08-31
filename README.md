@@ -4,6 +4,13 @@
 Forked from [Daniel Shiffman](https://github.com/shiffman)'s Coding Challenge #32.
 Node.js For backend.
 
+## Setup
+1. git clone https://github.com/hkirat/agar.io.git
+2. cd agar.io
+3. npm install
+4. node server.js
+5. Go to localhost:3001
+
 ## Function Details
  
  Sent Functions
@@ -24,10 +31,3 @@ Node.js For backend.
 ![Agar.io](./images/agar.png)
 
 ![Agar.io](./images/agar2.png)
-
-## Setup
-1. git clone https://github.com/hkirat/agar.io.git
-2. cd agar.io
-3. npm install
-4. node server.js
-5. Go to localhost:3001
