@@ -50,4 +50,7 @@ function draw() {
   for(var i = 0 ; i<players.length; i++) {
     players[i].show();
   }
+  textSize(blob.r/2);
+  text(name, blob.pos.x - blob.r, blob.pos.y - 1 * blob.r);
+  fill(0, 102, 153, 51);
 }

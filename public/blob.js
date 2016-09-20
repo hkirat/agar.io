@@ -3,17 +3,17 @@
 // http://patreon.com/codingrainbow
 // Code for: https://youtu.be/JXuxYMGe4KI
 
-function Blob(x, y, r, id) {
+function Blob(x, y, r, id, name) {
   this.pos = createVector(x, y);
   this.r = r;
   this.vel = createVector(0,0);
   this.id  = id;
+  this.name = name;
   this.color = color(random()*255, random()*255, random()*255);
   this.update = function() {
     var transL = this.setTranslation();
     var xTrans = transL[0]
     var yTrans = transL[1];
-    console.log(transL);
     var newvel = createVector(xTrans, yTrans);
     if(newvel.x!=0 || newvel.y !=0) {
       if(keyIsDown(SHIFT)) {
@@ -52,5 +52,10 @@ function Blob(x, y, r, id) {
   this.show = function() {
     fill(this.color);
     ellipse(this.pos.x, this.pos.y, this.r*2, this.r*2);
+    if(this.name) {
+      textSize(this.r/2);
+      text(this.name, this.pos.x - this.r, this.pos.y - 1 * this.r);
+      fill(0, 102, 153, 51);
+    }
   }
 }

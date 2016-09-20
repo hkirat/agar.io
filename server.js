@@ -15,11 +15,12 @@ app.use(expressLayouts);
 app.set('layout');
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
-function blob(x, y, size, id) {
+function blob(x, y, size, id, name) {
 	this.x = x;
 	this.y = y;
 	this.size = size;
 	this.id = id;
+	this.name = name;
 }
 var blobs = [];
 var players = [];
@@ -41,6 +42,11 @@ io.on('connection', function(socket)
 	socket.emit("initialiseId",  id);
 	socket.emit("initialiseEnemies", players);
 	socket.emit("initialiseBlobs", blobs);
+	socket.on("name", function(name) {
+		var in1 = players.map(function(e) { return e.id; }).indexOf(id);
+		players[in1].name = name;
+		io.emit("name", [in1, name]);
+	})
 	socket.on("position", function(val) {
 		var in1 = players.map(function(e) { return e.id; }).indexOf(id);
 		if(in1==-1)
@@ -51,6 +57,7 @@ io.on('connection', function(socket)
 		io.emit("position", [id, val[0], val[1]]);
 	});
 	socket.on("eat", function(i) {
+		
 		blobs.splice(i, 1);
 		io.emit("eat", [id, i]);
 	});
@@ -73,4 +80,4 @@ setInterval(function() {
 	var y = (Math.random()-.5) * height * 2;
 	blobs.push([x, y]);
 	io.emit("createBlob", blobs[blobs.length-1]);
-}, 1000);
+}, 300);

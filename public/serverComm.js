@@ -7,7 +7,7 @@ socket.on("initialiseBlobs", function(b) {
 
 socket.on("initialiseEnemies", function(e) {
   for(var i = 0; i<e.length; i++) {
-    players.push(new Blob(e[i].x, e[i].y, e[i].size, e[i].id));
+    players.push(new Blob(e[i].x, e[i].y, e[i].size, e[i].id, e[i].name));
   }
   var in1 = players.map(function(e) { return e.id; }).indexOf(index);
   if(in1!=-1) 
@@ -20,6 +20,10 @@ socket.on("initialiseId", function(id) {
   index = id;
 });
 
+socket.on("name", function(nm) {
+  console.log("name is "+nm[0] + "  " + nm[1]);
+  players[nm[0]].name = nm[1];
+})
 socket.on("position", function(value) {
   var in1 = players.map(function(e) { return e.id; }).indexOf(value[0]);
   players[in1].pos.x = value[1];
@@ -58,3 +62,5 @@ socket.on("deleteUser", function(id) {
 socket.on("createBlob", function(b) {
    blobs.push(new Blob(b[0], b[1], 16));
 });
+var name = prompt("Enter your name");
+socket.emit("name", name);
