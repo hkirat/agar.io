@@ -48,6 +48,10 @@ socket.on("ateUser", function(id) {
   players[in2].r = sqrt(sum / PI);
   if(id[1] == index) {
     blob = false;
+    var r = confirm("You were eaten. Restart Game?");
+    if (r == true) {
+      window.location = "./";
+    }
   }
   players.splice(in1, 1);
 });

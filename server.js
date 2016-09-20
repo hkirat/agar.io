@@ -44,8 +44,10 @@ io.on('connection', function(socket)
 	socket.emit("initialiseBlobs", blobs);
 	socket.on("name", function(name) {
 		var in1 = players.map(function(e) { return e.id; }).indexOf(id);
-		players[in1].name = name;
-		io.emit("name", [in1, name]);
+		if(in1 != -1) {
+			players[in1].name = name;
+			io.emit("name", [in1, name]);
+		}
 	})
 	socket.on("position", function(val) {
 		var in1 = players.map(function(e) { return e.id; }).indexOf(id);
@@ -57,7 +59,6 @@ io.on('connection', function(socket)
 		io.emit("position", [id, val[0], val[1]]);
 	});
 	socket.on("eat", function(i) {
-		
 		blobs.splice(i, 1);
 		io.emit("eat", [id, i]);
 	});
