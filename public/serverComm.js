@@ -46,11 +46,12 @@ socket.on("eat", function(index) {
 socket.on("ateUser", function(id) {
   var in1 = players.map(function(e) { return e.id; }).indexOf(id[1]);
   var in2 = players.map(function(e) { return e.id; }).indexOf(id[0]);
+  if(in1 == -1)
+    return;
   var sum = PI * players[in1].r * players[in1].r + PI * players[in2].r * players[in2].r;
   players[in2].r = sqrt(sum / PI);
   if(id[1] == index) {
     socket.emit("disconnect");
-    console.log("you were eaten");
     blob = false;
     var r = confirm("You were eaten. Restart Game?");
     if (r == true) {
