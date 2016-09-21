@@ -34,47 +34,47 @@ for (var i = 0; i < 200; i++) {
 
 io.on('connection', function(socket)
 {
-	var id = ID;
-	ID++;
-	players.push(new blob(0, 0, 64, id));
-	console.log("connected to "+socket.id);
-	socket.broadcast.emit("playerAdded", id);
-	socket.emit("initialiseId",  id);
-	socket.emit("initialiseEnemies", players);
-	socket.emit("initialiseBlobs", blobs);
 	socket.on("name", function(name) {
+		ID++;
+		var id = ID;
+		players.push(new blob(0, 0, 64, id));
+		console.log("connected to "+socket.id);
+		socket.broadcast.emit("playerAdded", id);
+		socket.emit("initialiseId",  id);
+		socket.emit("initialiseEnemies", players);
+		socket.emit("initialiseBlobs", blobs);
 		var in1 = players.map(function(e) { return e.id; }).indexOf(id);
 		if(in1 != -1) {
 			players[in1].name = name;
 			io.emit("name", [in1, name]);
 		}
-	})
-	socket.on("position", function(val) {
-		var in1 = players.map(function(e) { return e.id; }).indexOf(id);
-		if(in1==-1)
-			return;
-		players[in1].x = val[0];
-		players[in1].y = val[1];
-		players[in1].size = val[2];
-		io.emit("position", [id, val[0], val[1]]);
+		socket.on("position", function(val) {
+			var in1 = players.map(function(e) { return e.id; }).indexOf(id);
+			if(in1==-1)
+				return;
+			players[in1].x = val[0];
+			players[in1].y = val[1];
+			players[in1].size = val[2];
+			io.emit("position", [id, val[0], val[1]]);
+		});
+		socket.on("eat", function(i) {
+			blobs.splice(i, 1);
+			io.emit("eat", [id, i]);
+		});
+	    socket.on("disconnect", function() {
+	 		var in1 = players.map(function(e) { return e.id; }).indexOf(id);
+			if(in1 != -1) {
+	    		console.log("deleted "+players[in1].name);
+				players.splice(in1, 1)
+		        io.emit("deleteUser", id);
+			}
+	    });
+	    socket.on("ateUser", function(id) {
+			var in1 = players.map(function(e) { return e.id; }).indexOf(id[1]);
+			players.splice(in1, 1);
+			io.emit("ateUser", id);
+	    });
 	});
-	socket.on("eat", function(i) {
-		blobs.splice(i, 1);
-		io.emit("eat", [id, i]);
-	});
-    socket.on("disconnect", function() {
- 		var in1 = players.map(function(e) { return e.id; }).indexOf(id);
-		if(in1 != -1) {
-    		console.log("deleted "+players[in1].name);
-			players.splice(in1, 1)
-	        io.emit("deleteUser", id);
-		}
-    });
-    socket.on("ateUser", function(id) {
-		var in1 = players.map(function(e) { return e.id; }).indexOf(id[1]);
-		players.splice(in1, 1);
-		io.emit("ateUser", id);
-    });
 });
 
 setInterval(function() {

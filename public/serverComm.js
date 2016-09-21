@@ -47,6 +47,8 @@ socket.on("ateUser", function(id) {
   var sum = PI * players[in1].r * players[in1].r + PI * players[in2].r * players[in2].r;
   players[in2].r = sqrt(sum / PI);
   if(id[1] == index) {
+    socket.emit("disconnect");
+    console.log("you were eaten");
     blob = false;
     var r = confirm("You were eaten. Restart Game?");
     if (r == true) {
