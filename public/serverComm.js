@@ -26,6 +26,8 @@ socket.on("name", function(nm) {
 })
 socket.on("position", function(value) {
   var in1 = players.map(function(e) { return e.id; }).indexOf(value[0]);
+  if(in1 == -1)
+    return;
   players[in1].pos.x = value[1];
   players[in1].pos.y = value[2];
 });
