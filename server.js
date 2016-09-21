@@ -65,6 +65,7 @@ io.on('connection', function(socket)
     socket.on("disconnect", function() {
  		var in1 = players.map(function(e) { return e.id; }).indexOf(id);
 		if(in1 != -1) {
+    		console.log("deleted "+players[in1].name);
 			players.splice(in1, 1)
 	        io.emit("deleteUser", id);
 		}
@@ -77,8 +78,10 @@ io.on('connection', function(socket)
 });
 
 setInterval(function() {
-	var x = (Math.random()-.5) * width * 2;
-	var y = (Math.random()-.5) * height * 2;
-	blobs.push([x, y]);
-	io.emit("createBlob", blobs[blobs.length-1]);
-}, 300);
+	if(blobs.length <= 500) {
+		var x = (Math.random()-.5) * width * 2;
+		var y = (Math.random()-.5) * height * 2;
+		blobs.push([x, y]);
+		io.emit("createBlob", blobs[blobs.length-1]);
+	}
+}, 500);
