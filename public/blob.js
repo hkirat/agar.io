@@ -2,7 +2,7 @@
 // http://codingrainbow.com
 // http://patreon.com/codingrainbow
 // Code for: https://youtu.be/JXuxYMGe4KI
-
+var f = 0;
 function Blob(x, y, r, id, name) {
   this.pos = createVector(x, y);
   this.r = r;
@@ -23,7 +23,10 @@ function Blob(x, y, r, id, name) {
       }
     }
     this.vel.lerp(newvel, 0.2);
-    socket.emit("position", [this.pos.x + this.vel.x, this.pos.y + this.vel.y, this.r]);
+    if(f==0) 
+      socket.emit("position", [this.pos.x + this.vel.x, this.pos.y + this.vel.y, this.r]);
+    f++;
+    f%=3;
   }
 
   this.setTranslation = function() {
