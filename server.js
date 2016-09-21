@@ -62,12 +62,7 @@ io.on('connection', function(socket)
 			io.emit("eat", [id, i]);
 		});
 	    socket.on("disconnect", function() {
-	 		var in1 = players.map(function(e) { return e.id; }).indexOf(id);
-			if(in1 != -1) {
-	    		console.log("deleted "+players[in1].name);
-				players.splice(in1, 1)
-		        io.emit("deleteUser", id);
-			}
+	    	
 	    });
 	    socket.on("ateUser", function(id) {
 			var in1 = players.map(function(e) { return e.id; }).indexOf(id[1]);
